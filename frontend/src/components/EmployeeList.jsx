@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import API from "../services/api";
 
 function EmployeeList() {
@@ -6,7 +6,7 @@ function EmployeeList() {
   const [message, setMessage] = useState({ text: "", type: "" });
   const [loading, setLoading] = useState(true);
 
-  const fetchEmployees = () => {
+  const fetchEmployees = useCallback(() => {
     setLoading(true);
     API.get("employees/")
       .then(res => {
@@ -28,11 +28,11 @@ function EmployeeList() {
         setTimeout(() => setMessage({ text: "", type: "" }), 5000);
         setLoading(false);
       });
-  };
+  }, []);
 
   useEffect(() => {
     fetchEmployees();
-  }, []);
+  }, [fetchEmployees]);
 
   const handleDelete = (id, name) => {
     if (!window.confirm(`Are you sure you want to delete ${name}?`)) {

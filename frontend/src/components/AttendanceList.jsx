@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import API from "../services/api";
 
 function AttendanceList() {
@@ -7,7 +7,7 @@ function AttendanceList() {
   const [loading, setLoading] = useState(true);
   const [filterDate, setFilterDate] = useState("");
 
-  const fetchAttendance = () => {
+  const fetchAttendance = useCallback(() => {
     setLoading(true);
     const url = filterDate ? `attendance/?date=${filterDate}` : "attendance/";
     API.get(url)
@@ -20,11 +20,11 @@ function AttendanceList() {
         setTimeout(() => setMessage({ text: "", type: "" }), 5000);
         setLoading(false);
       });
-  };
+  }, [filterDate]);
 
   useEffect(() => {
     fetchAttendance();
-  }, [filterDate]);
+  }, [fetchAttendance]);
 
   return (
     <div className="card">
