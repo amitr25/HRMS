@@ -33,16 +33,6 @@ Open `http://localhost:3000`
 
 ---
 
-## ❌ Why Data Shows as 0
-
-**Problem:** When you close the browser tab, if you also:
-- Close the terminal running backend server
-- Stop the backend with `Ctrl+C`
-
-**Result:** Next time you open the app, frontend can't connect to backend API, shows 0.
-
----
-
 ## 💡 Best Practice
 
 ### Option 1: Keep Terminals Open
